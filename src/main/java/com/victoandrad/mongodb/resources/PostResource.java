@@ -3,6 +3,7 @@ package com.victoandrad.mongodb.resources;
 import com.victoandrad.mongodb.domain.Post;
 import com.victoandrad.mongodb.domain.User;
 import com.victoandrad.mongodb.dto.UserDTO;
+import com.victoandrad.mongodb.resources.util.URL;
 import com.victoandrad.mongodb.services.PostService;
 import com.victoandrad.mongodb.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +26,14 @@ public class PostResource {
         Post obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
     }
+
+    @RequestMapping(value="/titlesearch", method = RequestMethod.GET)
+    public ResponseEntity<List<Post>> findByTitle(@RequestParam(value="text", defaultValue = "") String text) {
+        text = URL.decodeParam(text);
+        List<Post> list = service.findByTitle(text);
+        return ResponseEntity.ok().body(list);
+    }
+
+
 
 }
