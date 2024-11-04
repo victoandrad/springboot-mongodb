@@ -1,6 +1,7 @@
 package com.victoandrad.mongodb.resources;
 
 import com.victoandrad.mongodb.domain.User;
+import com.victoandrad.mongodb.dto.UserDTO;
 import com.victoandrad.mongodb.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +19,10 @@ public class UserResource {
     private UserService service;
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<User>> findAll() {
-        List<User> list = service.findAll();
+    public ResponseEntity<List<UserDTO>> findAll() {
+        List<UserDTO> list = service.findAll().stream()
+                .map(user -> new UserDTO(user))
+                .toList();
         return ResponseEntity.ok().body(list);
     }
 }
