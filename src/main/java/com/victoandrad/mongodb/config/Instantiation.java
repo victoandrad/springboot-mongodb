@@ -2,6 +2,7 @@ package com.victoandrad.mongodb.config;
 
 import com.victoandrad.mongodb.domain.Post;
 import com.victoandrad.mongodb.domain.User;
+import com.victoandrad.mongodb.dto.AuthorDTO;
 import com.victoandrad.mongodb.repositories.PostRepository;
 import com.victoandrad.mongodb.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +36,8 @@ public class Instantiation implements CommandLineRunner {
 
         userRepository.saveAll(List.of(user1, user2, user3));
 
-        Post post1 = new Post(null, sdf.parse("03/11/2024"), "Partiu Enem!", "Hoje vou fazer o meu primeiro Enem!", user2);
-        Post post2 = new Post(null, sdf.parse("10/11/2024"), "Partiu Enem Novamente!", "Vamos terminar logo com isso!", user2);
+        Post post1 = new Post(null, sdf.parse("03/11/2024"), "Partiu Enem!", "Hoje vou fazer o meu primeiro Enem!", new AuthorDTO(user2));
+        Post post2 = new Post(null, sdf.parse("10/11/2024"), "Partiu Enem Novamente!", "Vamos terminar logo com isso!", new AuthorDTO(user2));
 
         postRepository.saveAll(List.of(post1, post2));
     }
