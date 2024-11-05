@@ -22,7 +22,6 @@ public class User implements Serializable {
     private String name;
     private String email;
 
-    // fazer as associações
     @DBRef(lazy = true)
     private List<Post> posts = new ArrayList<>();
 
